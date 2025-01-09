@@ -1,0 +1,66 @@
+name: Build Package
+env:
+  project_url: "https://github.com/${{github.repository}}"
+  latest_manifest_url: "https://github.com/${{github.repository}}/releases/latest/download/module.json"
+  release_module_url: "https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/module.zip"
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    name: Build Package
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: |
+          npm install
+          npm run build:prod
+
+      - name: Extract Version from Tag
+        id: get_version
+        uses: battila7/get-version-action@v2
+
+      - name: Modify Module Manifest
+        id: sub_manifest_link_version
+        uses: cschleiden/replace-tokens@v1
+        with:
+          files: '["dist/module.json", "module.json"]'
+        env:
+          VERSION: ${{steps.get_version.outputs.version-without-v}}
+          URL: ${{ env.project_url }}
+          MANIFEST: ${{ env.latest_manifest_url }}
+          DOWNLOAD: ${{ env.release_module_url }}
+
+      - name: Create Module Archive
+        working-directory: ./dist
+        run: |
+          # Note that `zip` will only emit warnings when a file or directory
+          # doesn't exist, it will not fail.
+          zip                                    \
+            `# Options`                          \
+            --recurse-paths                      \
+            `# The name of the output file`      \
+             ../module.zip                       \
+            `# The files that will be included.` \
+            .
+
+      - name: Update Release with Files
+        id: create_version_release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          name: ${{ github.event.release.name }}
+          draft: ${{ github.event.release.unpublished }}
+          prerelease: ${{ github.event.release.prerelease }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: "./module.json, ./module.zip"
+          tag: ${{ github.event.release.tag_name }}
+          body: ${{ github.event.release.body }}
