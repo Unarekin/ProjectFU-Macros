@@ -13,11 +13,16 @@
      */
     const DELETE_EFFECTS = true;
 
-    if ((Array.isArray(args) && args.length === 0) || !args)
-      throw new Error("No actors provided.");
-    const actors = args
-      .map((arg) => EricaPFU.coerceActor(arg))
-      .filter((arg) => !!arg);
+    if (!args)
+      throw new Error(
+        `Please be sure this macro is run via a MATT trigger action.`
+      );
+
+    const actors =
+      args.length === 0
+        ? canvas.tokens.controlled.map((token) => token.actor)
+        : args.map((arg) => EricaPFU.coerceActor(arg)).filter((arg) => !!arg);
+
     if (actors.length === 0) throw new Error(`No valid actors provided.`);
 
     const promises = [];
@@ -25,9 +30,13 @@
     for (const actor of actors) {
       // const statusEffects = actor.effects.filter(effect => effect.statuses.size);
       const statusEffects = actor.effects.reduce(
-        (prev, curr) => (curr.statuses.size ? [...prev, curr.id] : prev),
+        (prev, curr) =>
+          curr.statuses.size && !curr.statuses.has("crisis")
+            ? [...prev, curr.id]
+            : prev,
         []
       );
+      console.log("Status effects:", statusEffects);
 
       if (statusEffects.length) {
         if (DELETE_EFFECTS) {
