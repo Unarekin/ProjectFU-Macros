@@ -10,11 +10,16 @@
 
 (async () => {
   try {
-    if ((Array.isArray(args) && args.length === 0) || !args)
-      throw new Error("No actors provided.");
-    const actors = args
-      .map((arg) => EricaPFU.coerceActor(arg))
-      .filter((arg) => !!arg);
+    if (!args)
+      throw new Error(
+        `Please be sure this macro is run via a MATT trigger action.`
+      );
+
+    const actors =
+      args.length === 0
+        ? canvas.tokens.controlled.map((token) => token.actor)
+        : args.map((arg) => EricaPFU.coerceActor(arg)).filter((arg) => !!arg);
+
     if (actors.length === 0) throw new Error(`No valid actors provided.`);
 
     const promises = [];
