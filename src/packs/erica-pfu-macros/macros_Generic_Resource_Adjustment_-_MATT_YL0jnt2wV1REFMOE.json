@@ -1,0 +1,27 @@
+{
+  "folder": "1PGDS68bBtlkt6o7",
+  "name": "Generic Resource Adjustment - MATT",
+  "type": "script",
+  "_id": "deOU5kcdp3pNLE17",
+  "author": "PPShuIcaH5NYIBgf",
+  "img": "icons/svg/chest.svg",
+  "scope": "global",
+  "command": "/**\n * Generic resource adjustment.  Expects the following arguments:\n * uuid: the UUID of an actor to adjust stuff for\n * resource: The resource to adjust -- hp, mp, or ip\n * adjustment: The adjustment to make.  Can take a few different forms:\n *    =#      Will set the resource to #.  ie: \"=0\" will set it to 0\n *    max     Will set the resource to its maximum value\n *    crisis  Will set the resource to 1/2 its maximum (rounded down)\n *    #       Will add # to the resource (Can also be written as +#)\n *    -#      Will subtract # from the resource\n */\n\n(async () => {\n  try {\n    const actor = await fromUuid(args[0]);\n    if (!actor) throw new Error(`Actor ${args[0]} not found.`);\n\n    const res = args[1].toLowerCase();\n    const adjust = typeof args[2] === \"string\" ? args[2].toLowerCase() : args[2];\n\n    if (res === \"ip\" && actor.type !== \"character\") throw new Error(`Attempting to adjust IP on non-PC actor ${actor.name}`);\n\n    const knownResources = [\"hp\", \"mp\", \"ip\"];\n\n    if (!knownResources.includes(res)) throw new Error(`Unknown resource: ${res}`);\n\n    if (typeof adjust === \"undefined\") throw new Error(`Resource adjustment not specified.`);\n  \n    let adjustAmount = \"\";\n\n    if (typeof adjust === \"string\" && adjust.trim()[0] === \"=\") {\n      // Set to value\n      adjustAmount = parseFloat(adjust.trim().substring(1));\n    } else if (adjust === \"max\") {\n      // Set to max\n      adjustAmount = actor.system.resources[res].max;\n    } else if (adjust === \"crisis\") {\n      // Set to 1/2\n      adjustAmount = Math.trunc(actor.system.resources[res].max / 2);\n    } else {\n      // Relative adjustment\n      adjustAmount = Math.max(Math.min(actor.system.resources[res].value + parseFloat(adjust), actor.system.resources[res].max), 0);\n    }\n\n    if (typeof adjustAmount !== \"number\") {\n      throw new Error(`Unknown adjustment string: ${adjust}`);\n    } else {\n      await actor.update({\n        system: {\n          resources: {\n            [res]: {\n              value: adjustAmount\n            }\n          }\n        }\n      });\n    }\n  } catch (err) {\n    ui.notifications?.error(err.message);\n  }\n})();",
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "PPShuIcaH5NYIBgf": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "projectfu",
+    "systemVersion": "2.4.8",
+    "createdTime": 1736402651726,
+    "modifiedTime": 1736402666220,
+    "lastModifiedBy": "PPShuIcaH5NYIBgf"
+  },
+  "_key": "!macros!YL0jnt2wV1REFMOE"
+}
