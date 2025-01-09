@@ -1,8 +1,20 @@
 {
   "inputs": {
+    "src/coercion.ts": {
+      "bytes": 3222,
+      "imports": [],
+      "format": "esm"
+    },
     "src/module.ts": {
-      "bytes": 74,
-      "imports": []
+      "bytes": 254,
+      "imports": [
+        {
+          "path": "src/coercion.ts",
+          "kind": "import-statement",
+          "original": "./coercion"
+        }
+      ],
+      "format": "esm"
     },
     "src/styles/module.scss": {
       "bytes": 244,
@@ -14,18 +26,21 @@
       "imports": [],
       "exports": [],
       "inputs": {},
-      "bytes": 269
+      "bytes": 5040
     },
     "dist/module.js": {
       "imports": [],
       "exports": [],
       "entryPoint": "src/module.ts",
       "inputs": {
+        "src/coercion.ts": {
+          "bytesInOutput": 1787
+        },
         "src/module.ts": {
-          "bytesInOutput": 92
+          "bytesInOutput": 78
         }
       },
-      "bytes": 175
+      "bytes": 1970
     },
     "dist/styles/module.css.map": {
       "imports": [],
