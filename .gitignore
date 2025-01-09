@@ -135,3 +135,4 @@ lint-report.html
 foundryvtt-12.331.zip
 
 dist/
+esbuild.meta.json

@@ -14,7 +14,7 @@
       "imports": [],
       "exports": [],
       "inputs": {},
-      "bytes": 268
+      "bytes": 269
     },
     "dist/module.js": {
       "imports": [],
@@ -22,10 +22,10 @@
       "entryPoint": "src/module.ts",
       "inputs": {
         "src/module.ts": {
-          "bytesInOutput": 77
+          "bytesInOutput": 95
         }
       },
-      "bytes": 160
+      "bytes": 178
     },
     "dist/styles/module.css.map": {
       "imports": [],
