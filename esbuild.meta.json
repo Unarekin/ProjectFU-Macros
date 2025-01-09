@@ -22,10 +22,10 @@
       "entryPoint": "src/module.ts",
       "inputs": {
         "src/module.ts": {
-          "bytesInOutput": 95
+          "bytesInOutput": 92
         }
       },
-      "bytes": 178
+      "bytes": 175
     },
     "dist/styles/module.css.map": {
       "imports": [],

@@ -1,6 +1,6 @@
 {
-  "id": "unarekin-pfu-macros",
-  "title": "Unarekin's Project FU Macros",
+  "id": "erica-pfu-macros",
+  "title": "Erica's Project FU Macros",
   "description": "",
   "version": "#{VERSION}#",
   "library": "false",
@@ -27,6 +27,19 @@
       "lang": "en",
       "name": "English",
       "path": "languages/en.json"
+    }
+  ],
+  "packs": [
+    {
+      "label": "Erica's Project FU Macros",
+      "type": "Macro",
+      "name": "erica-pfu-macros",
+      "path": "packs/erica-pfu-macros",
+      "system": "projectfu",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     }
   ],
   "url": "#{URL}#",
