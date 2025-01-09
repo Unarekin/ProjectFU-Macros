@@ -203,10 +203,6 @@ if (buildResults.errors.length) {
         await fs.readFile(path.join(SRC_PATH, "macros", file))
       ).toString();
 
-      const escaped = {
-        prop: JSON.stringify(content),
-      }.prop;
-
       const macroFilePattern = `macros_${path
         .basename(file, path.extname(file))
         .replaceAll(" ", "_")}`;
@@ -222,7 +218,7 @@ if (buildResults.errors.length) {
       ).toString();
 
       const macroFileJSON = JSON.parse(macroFileContent);
-      macroFileJSON.command = escaped;
+      macroFileJSON.command = `${content}`;
       await fs.writeFile(
         path.join(MACRO_PACK_PATH, macroFile),
         JSON.stringify(macroFileJSON, null, 2)

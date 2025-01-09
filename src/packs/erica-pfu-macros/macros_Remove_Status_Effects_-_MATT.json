@@ -1,0 +1,27 @@
+{
+  "folder": "1PGDS68bBtlkt6o7",
+  "name": "Remove Status Effects - MATT",
+  "type": "script",
+  "_id": "106dGudAE9Q3vVrr",
+  "author": "PPShuIcaH5NYIBgf",
+  "img": "icons/svg/regen.svg",
+  "scope": "global",
+  "command": "/**\n * Removes any active effects that include status effects on the character.\n *\n * Multiple arguments can be passed to the macro, each in the form of an actor or token UUID, name, or ID.\n * When using a name with multiple words, put it in quotation marks.  IE: \"Blair Clarimonde\"\n */\n\n(async () => {\n  try {\n    /**\n     * If true, will delete the active effects that are associated with status effects.\n     * Otherwise, they will be disabled but not deleted\n     */\n    const DELETE_EFFECTS = true;\n\n    if ((Array.isArray(args) && args.length === 0) || !args)\n      throw new Error(\"No actors provided.\");\n    const actors = args\n      .map((arg) => EricaPFU.coerceActor(arg))\n      .filter((arg) => !!arg);\n    if (actors.length === 0) throw new Error(`No valid actors provided.`);\n\n    const promises = [];\n\n    for (const actor of actors) {\n      // const statusEffects = actor.effects.filter(effect => effect.statuses.size);\n      const statusEffects = actor.effects.reduce(\n        (prev, curr) => (curr.statuses.size ? [...prev, curr.id] : prev),\n        []\n      );\n\n      if (statusEffects.length) {\n        if (DELETE_EFFECTS) {\n          promises.push(\n            actor.deleteEmbeddedDocuments(\"ActiveEffect\", statusEffects)\n          );\n        } else {\n          promises.push(\n            actor.updateEmbeddedDocuments(\n              \"ActiveEffect\",\n              statusEffects.map((id) => ({\n                _id: id,\n                disabled: true,\n              }))\n            )\n          );\n        }\n      }\n    }\n  } catch (err) {\n    ui.notifications?.error(err.message);\n  }\n})();\n",
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "PPShuIcaH5NYIBgf": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "projectfu",
+    "systemVersion": "2.4.8",
+    "createdTime": 1736416462304,
+    "modifiedTime": 1736416462304,
+    "lastModifiedBy": "PPShuIcaH5NYIBgf"
+  },
+  "_key": "!macros!106dGudAE9Q3vVrr"
+}
