@@ -84,3 +84,37 @@ export function findZeroPower(arg: unknown): Item | undefined {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
   return actor.items.find((item: any) => item.system?.optionalType === "projectfu.zeroPower" || item.type === "zeroPower");
 }
+
+/**
+ * Calculates an adjusted value based on several different formats it could take.
+ * @param arg - The adjustment identifier
+ * @param {number} current - Current value of the thing we are adjusting
+ * @param {number} max - Maximum value of the thing we are adjusting
+ * @param {boolean} [clamp=false] - If false, will not clamp the value between 0->max
+ */
+export function calculateStandardAdjustment(arg: string | number, current: number, step: number, max: number, shouldClamp: boolean = true): number {
+  console.log("Adjustment:", arg);
+  const adjust = typeof arg === "string" ? arg.trim() : typeof arg === "number" ? arg : typeof arg === "undefined" ? 1 : undefined;
+  if (adjust === undefined) throw new Error(`Unknown adjustment format: ${coerceString(arg)}`);
+
+  // Easy exits
+  if (adjust === "max") return max;
+  if (adjust === 0 || adjust === "0") return 0;
+  if (typeof adjust === "number") return clamp(current + adjust, 0, max, shouldClamp);
+
+  if (adjust === "step") {
+    return clamp(current + step, 0, max, shouldClamp);
+  } else if (adjust === "-step") {
+    return clamp(current - step, 0, max, shouldClamp);
+  } else if (typeof adjust === "string") {
+    const actual = parseFloat(adjust);
+    if (isNaN(actual)) throw new Error(`Unknown adjustment format: ${coerceString(arg)}`);
+    return clamp(current + actual, 0, max, shouldClamp);
+  }
+
+  throw new Error(`Unknown adjustment format: ${coerceString(arg)}`);
+}
+
+export function clamp(value: number, min: number, max: number, shouldClamp: boolean = true): number {
+  return shouldClamp ? Math.min(Math.max(value, min), max) : value;
+}
