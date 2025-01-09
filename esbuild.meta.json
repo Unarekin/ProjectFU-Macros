@@ -1,0 +1,47 @@
+{
+  "inputs": {
+    "src/module.ts": {
+      "bytes": 74,
+      "imports": []
+    },
+    "src/styles/module.scss": {
+      "bytes": 244,
+      "imports": []
+    }
+  },
+  "outputs": {
+    "dist/module.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 268
+    },
+    "dist/module.js": {
+      "imports": [],
+      "exports": [],
+      "entryPoint": "src/module.ts",
+      "inputs": {
+        "src/module.ts": {
+          "bytesInOutput": 77
+        }
+      },
+      "bytes": 160
+    },
+    "dist/styles/module.css.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 93
+    },
+    "dist/styles/module.css": {
+      "imports": [],
+      "entryPoint": "src/styles/module.scss",
+      "inputs": {
+        "src/styles/module.scss": {
+          "bytesInOutput": 0
+        }
+      },
+      "bytes": 68
+    }
+  }
+}
