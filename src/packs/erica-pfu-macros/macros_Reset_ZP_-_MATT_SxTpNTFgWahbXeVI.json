@@ -1,0 +1,27 @@
+{
+  "folder": "1PGDS68bBtlkt6o7",
+  "name": "Reset ZP - MATT",
+  "type": "script",
+  "_id": "SxTpNTFgWahbXeVI",
+  "author": "PPShuIcaH5NYIBgf",
+  "img": "icons/svg/lightning.svg",
+  "scope": "global",
+  "command": "/**\n * Resets a character's Zero power clock, if one is located.\n * Will ONLY use the first feature found that looks to be a Zero Power, so if\n * for some reason you have more than one, this will only adjust the first\n * one listed on your character sheet.\n *\n * Multiple arguments can be passed to the macro, each in the form of an actor or token UUID, name, or ID.\n * When using a name with multiple words, put it in quotation marks.  IE: \"Blair Clarimonde\"\n */\n(async () => {\n  try {\n    if (!args)\n      throw new Error(\n        `Please be sure this macro is run via a MATT trigger action.`\n      );\n\n    const actors =\n      args.length === 0\n        ? canvas.tokens.controlled.map((token) => token.actor)\n        : args.map((arg) => EricaPFU.coerceActor(arg)).filter((arg) => !!arg);\n\n    if (actors.length === 0) throw new Error(`No valid actors provided.`);\n\n    const promises = [];\n\n    for (const actor of actors) {\n      const power = EricaPFU.findZeroPower(actor);\n      if (!(power instanceof Item)) continue;\n\n      if (power.type === \"zeroPower\") {\n        promises.push(\n          actor.updateEmbeddedDocuments(\"Item\", [\n            {\n              _id: power.id,\n              system: {\n                progress: {\n                  current: 0,\n                },\n              },\n            },\n          ])\n        );\n      } else if (power.system.optionalType === \"projectfu.zeroPower\") {\n        promises.push(\n          actor.updateEmbeddedDocuments(\"Item\", [\n            {\n              _id: power.id,\n              system: {\n                data: {\n                  progress: {\n                    current: 0,\n                  },\n                },\n              },\n            },\n          ])\n        );\n      }\n    }\n\n    if (promises.length) await Promise.all(promises);\n  } catch (err) {\n    ui.notifications?.error(err.message, { console: false });\n    console.error(err);\n  }\n})();\n",
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "PPShuIcaH5NYIBgf": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "projectfu",
+    "systemVersion": "2.4.8",
+    "createdTime": 1736442300153,
+    "modifiedTime": 1736442344533,
+    "lastModifiedBy": "PPShuIcaH5NYIBgf"
+  },
+  "_key": "!macros!SxTpNTFgWahbXeVI"
+}
