@@ -1,17 +1,38 @@
 {
   "inputs": {
     "src/coercion.ts": {
-      "bytes": 4837,
+      "bytes": 3222,
       "imports": [],
       "format": "esm"
     },
-    "src/module.ts": {
-      "bytes": 314,
+    "src/functions.ts": {
+      "bytes": 1691,
       "imports": [
         {
           "path": "src/coercion.ts",
           "kind": "import-statement",
           "original": "./coercion"
+        },
+        {
+          "path": "./types",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "src/module.ts": {
+      "bytes": 390,
+      "imports": [
+        {
+          "path": "src/coercion.ts",
+          "kind": "import-statement",
+          "original": "./coercion"
+        },
+        {
+          "path": "src/functions.ts",
+          "kind": "import-statement",
+          "original": "./functions"
         }
       ],
       "format": "esm"
@@ -26,7 +47,7 @@
       "imports": [],
       "exports": [],
       "inputs": {},
-      "bytes": 7606
+      "bytes": 8058
     },
     "dist/module.js": {
       "imports": [],
@@ -34,13 +55,16 @@
       "entryPoint": "src/module.ts",
       "inputs": {
         "src/coercion.ts": {
-          "bytesInOutput": 2943
+          "bytesInOutput": 1787
+        },
+        "src/functions.ts": {
+          "bytesInOutput": 1433
         },
         "src/module.ts": {
-          "bytesInOutput": 111
+          "bytesInOutput": 140
         }
       },
-      "bytes": 3159
+      "bytes": 3488
     },
     "dist/styles/module.css.map": {
       "imports": [],

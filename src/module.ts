@@ -1,9 +1,12 @@
-import { calculateStandardAdjustment, coerceActor, coerceItem, findZeroPower } from './coercion';
+import { coerceActor, coerceItem, coerceString, findZeroPower } from './coercion';
+import { adjustProgressItem, adjustResource } from './functions';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
 (window as any).EricaPFU = {
   coerceActor,
   coerceItem,
   findZeroPower,
-  calculateStandardAdjustment
+  adjustProgressItem,
+  adjustResource,
+  coerceString
 };
