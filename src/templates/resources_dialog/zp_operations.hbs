@@ -1,0 +1,16 @@
+<section id="zp-operations">
+  <div class="flexrow"{{#unless hasZP}} style="display:none"{{/unless}} data-resource="zp">
+    <div class="flexrow">
+      <i class="fas fa-bolt icon zp resource-icon"></i>
+      <select id="zpOperation" name="zpOperation">
+        {{selectOptions zpOperationSelect localize=true}}
+      </select>
+      <div></div>
+    </div>
+    <div class="flexrow">
+      <input type="number" id="attributeZP" name="attributeZP" value="0" step="1" max="6" min="0">
+      <button class="num-button" data-operation="decrement" data-field="attributeZP" title="{{localize "EPFU.MODIFYRESOURCES.BUTTONS.DECREMENT" RESOURCE=(localize "EPFU.MODIFYRESOURCES.RESOURCES.ZP")}}">-</button>
+      <button class="num-button" data-operation="increment" data-field="attributeZP" title="{{localize "EPFU.MODIFYRESOURCES.BUTTONS.INCREMENT" RESOURCE=(localize "EPFU.MODIFYRESOURCES.RESOURCES.ZP")}}">+</button>
+    </div>
+  </div>
+</section>

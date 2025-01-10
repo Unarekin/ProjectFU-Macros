@@ -10,10 +10,12 @@ export function coerceActor(arg: unknown): Actor | undefined {
 
   if (typeof arg === "string" && game instanceof Game && game.actors) {
     // Check ID
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     let actor = game.actors.get(arg);
     if (actor instanceof Actor) return actor;
 
     // Check name
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     actor = game.actors.getName(arg);
     if (actor instanceof Actor) return actor;
 
@@ -50,9 +52,11 @@ export function coerceItem(arg1: unknown, arg2: unknown): Item | undefined {
   if (!(actor instanceof Actor)) throw new Error(`Unable to locate actor: ${coerceString(arg1)}`);
 
   if (typeof arg2 === "string") {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     let item = actor.items.get(arg2);
     if (item instanceof Item) return item;
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     item = actor.items.getName(arg2);
     if (item instanceof Item) return item;
   }
@@ -81,6 +85,6 @@ export function findZeroPower(arg: unknown): Item | undefined {
   const actor = coerceActor(arg);
   if (!(actor instanceof Actor)) throw new Error(`Unable to locate actor: ${coerceString(arg)}`);
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
   return actor.items.find((item: any) => item.system?.optionalType === "projectfu.zeroPower" || item.type === "zeroPower");
 }

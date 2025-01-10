@@ -98,6 +98,7 @@ const STATIC_FILES = [
   { src: "./LICENSE", dest: "LICENSE" },
   { src: "./README.md", dest: "README.md" },
   { src: TEMPLATE_PATH, dest: "templates" },
+  { src: path.join(SRC_PATH, "styles"), dest: "styles" },
   { src: path.join(SRC_PATH, "assets"), dest: "assets" },
 ];
 

@@ -1,12 +1,12 @@
 {
   "inputs": {
     "src/coercion.ts": {
-      "bytes": 3222,
+      "bytes": 3740,
       "imports": [],
       "format": "esm"
     },
     "src/functions.ts": {
-      "bytes": 1691,
+      "bytes": 1821,
       "imports": [
         {
           "path": "src/coercion.ts",
@@ -21,8 +21,29 @@
       ],
       "format": "esm"
     },
+    "src/dialogs/functions.ts": {
+      "bytes": 2380,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/dialogs/ModifyResourcesDialogV2.ts": {
+      "bytes": 2196,
+      "imports": [
+        {
+          "path": "Foundry-VTT/src/types/utils.mjs",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "src/dialogs/functions.ts",
+          "kind": "import-statement",
+          "original": "./functions"
+        }
+      ],
+      "format": "esm"
+    },
     "src/module.ts": {
-      "bytes": 390,
+      "bytes": 965,
       "imports": [
         {
           "path": "src/coercion.ts",
@@ -33,12 +54,17 @@
           "path": "src/functions.ts",
           "kind": "import-statement",
           "original": "./functions"
+        },
+        {
+          "path": "src/dialogs/ModifyResourcesDialogV2.ts",
+          "kind": "import-statement",
+          "original": "./dialogs/ModifyResourcesDialogV2"
         }
       ],
       "format": "esm"
     },
     "src/styles/module.scss": {
-      "bytes": 244,
+      "bytes": 7836,
       "imports": []
     }
   },
@@ -47,7 +73,7 @@
       "imports": [],
       "exports": [],
       "inputs": {},
-      "bytes": 8058
+      "bytes": 16450
     },
     "dist/module.js": {
       "imports": [],
@@ -58,29 +84,35 @@
           "bytesInOutput": 1787
         },
         "src/functions.ts": {
-          "bytesInOutput": 1433
+          "bytesInOutput": 1553
+        },
+        "src/dialogs/functions.ts": {
+          "bytesInOutput": 2476
+        },
+        "src/dialogs/ModifyResourcesDialogV2.ts": {
+          "bytesInOutput": 1549
         },
         "src/module.ts": {
-          "bytesInOutput": 140
+          "bytesInOutput": 594
         }
       },
-      "bytes": 3488
+      "bytes": 8163
     },
     "dist/styles/module.css.map": {
       "imports": [],
       "exports": [],
       "inputs": {},
-      "bytes": 93
+      "bytes": 5011
     },
     "dist/styles/module.css": {
       "imports": [],
       "entryPoint": "src/styles/module.scss",
       "inputs": {
         "src/styles/module.scss": {
-          "bytesInOutput": 0
+          "bytesInOutput": 2823
         }
       },
-      "bytes": 68
+      "bytes": 2891
     }
   }
 }

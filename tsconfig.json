@@ -1,8 +1,10 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig.json",
-  "include": ["./@types", "./src/module.ts"],
+  "include": ["./@types"],
   "exclude": ["./node_modules"],
+  "files": ["./src/module.ts"],
   "compilerOptions": {
+    "outDir": "dist",
     "typeRoots": ["./@types", "./node_modules/@types"],
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

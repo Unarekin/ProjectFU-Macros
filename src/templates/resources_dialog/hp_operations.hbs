@@ -1,0 +1,26 @@
+<section id="hp-operations">
+  <div class="flexrow" data-operation-row data-resource="hp">
+    <div class="flexrow">
+      <i class="fas fa-heart-crack hp resource-icon"></i>
+      <select name="hpOperation" id="hpOperation" data-operation-type>
+        {{selectOptions hpOperationSelect localize=true}}
+      </select>
+      <div></div>
+    </div>
+    <div class="flexrow">
+      <input type="number" id="attributeHP" name="attributeHP" value="0" step="1" autofocus data-operation-value>
+      <div>
+        <select id="damageType" name="damageType" class="full-width">
+          {{selectOptions damageTypeSelect localize=true}}
+        </select>
+      </div>
+      <div>
+        <select id="ignoreAffinities" name="ignoreAffinities" class="full-width">
+          {{selectOptions ignoreAffinitiesSelect localize=true}}
+        </select>
+      </div>
+      <button class="num-button" data-operation="decrement" data-field="attributeHP" title="{{localize "EPFU.MODIFYRESOURCES.BUTTONS.DECREMENT" RESOURCE=(localize "EPFU.MODIFYRESOURCES.RESOURCES.HP")}}">-</button>
+      <button class="num-button" data-operation="increment" data-field="attributeHP" title="{{localize "EPFU.MODIFYRESOURCES.BUTTONS.INCREMENT" RESOURCE=(localize "EPFU.MODIFYRSOURCES.RESOURCES.HP")}}">+</button>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,44 @@
+<section id="resource-operations">
+  <div class="flexcol resource-options">
+    {{> "modules/erica-pfu-macros/templates/resources_dialog/hp_operations.hbs"}}
+    {{> "modules/erica-pfu-macros/templates/resources_dialog/mp_operations.hbs"}}
+    {{> "modules/erica-pfu-macros/templates/resources_dialog/ip_operations.hbs"}}
+    {{> "modules/erica-pfu-macros/templates/resources_dialog/zp_operations.hbs"}}
+    <div class="flexrow">
+      <div>
+        <div calss="resource-icon"></div>
+        <div>
+          <input
+            type="checkbox"
+            class="leftcheck"
+            id="allToMax"
+            name="allToMax"
+            value="true"
+          />
+          <label for="allToMax" class="checklabel">
+            {{localize
+              "EPFU.MODIFYRESOURCES.LABELS.ALLTOMAX"
+              HP=(localize "EPFU.MODIFYRESOURCES.RESOURCES.HP")
+              MP=(localize "EPFU.MODIFYRESOURCES.RESOURCES.MP")
+              IP=(localize "EPFU.MODIFYRESOURCES.RESOURCES.IP")
+            }}
+          </label>
+        </div>
+      </div>
+      <div>
+        <div>
+          <input
+            type="checkbox"
+            class="leftcheck"
+            id="bypassClamping"
+            name="bypassClamping"
+            value="true"
+          />
+          <label for="bypassClamping" class="checklabel">
+            {{localize "EPFU.MODIFYRESOURCES.LABELS.BYPASSCLAMPING"}}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

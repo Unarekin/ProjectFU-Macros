@@ -40,3 +40,8 @@ export function adjustResource(adjust: string | number, current: number, max: nu
   if (isNaN(parse)) throw new Error(`Non-numeric value: ${coerceString(adjust)}`);
   return clamp(current + parse, 0, max, shouldClamp);
 }
+
+
+export function shouldUseAppV2(): boolean {
+  return !!(game.release?.isNewer("12") && foundry.applications.api.ApplicationV2)
+}

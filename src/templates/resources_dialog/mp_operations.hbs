@@ -1,0 +1,16 @@
+<section id="mp-operations">
+  <div class="flexrow" data-operation-row data-resource="mp">
+    <div class="flexrow">
+      <i class="fas fa-hat-wizard icon mp resource-icon"></i>
+      <select id="mpOperation" name="mpOperation" data-operation-type>
+        {{selectOptions mpOperationSelect localize=true}}
+      </select>
+      <div></div>
+    </div>
+    <div class="flexrow">
+      <input type="number" id="attributeMP" name="attributeMP" value="0" step="1" data-operation-value>
+      <button class="num-button" data-operation="decrement" data-field="attributeMP" title="{{localize "EPFU.MODIFYRESOURCES.BUTTONS.DECREMENT" RESOURCE=(localize "EPFU.MODIFYRSOURCES.RESOURCES.MP")}}">-</button>
+      <button class="num-button" data-operation="increment" data-field="attributeMP" title="{{localize "EPFU.MODIFYRESOURCES.BUTTONS.INCREMENT" RESOURCE=(localize "EPFU.MODIFYRSOURCES.RESOURCES.MP")}}">+</button>
+    </div>
+  </div>
+</section>

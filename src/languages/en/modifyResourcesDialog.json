@@ -1,0 +1,68 @@
+{
+  "EPFU": {
+    "MODIFYRESOURCES": {
+      "TITLE": "Modify Resources",
+      "DAMAGETYPES": {
+        "PHYSICAL": "Physical",
+        "AIR": "Air",
+        "BOLT": "Bolt",
+        "DARK": "Dark",
+        "EARTH": "Earth",
+        "FIRE": "Fire",
+        "ICE": "Ice",
+        "LIGHT": "Light",
+        "POISON": "Poison",
+        "UNTYPED": "Untyped"
+      },
+      "BUTTONS": {
+        "ADDTOKENS": "Add Token(s)",
+        "CANCEL": "Cancel",
+        "OK": "Ok"
+      },
+      "LABELS": {
+        "ALLTOMAX": "Set {HP}/{MP}/{IP} To Max",
+        "BYPASSCLAMPING": "Bypass Value Clamping"
+      },
+      "RESOURCES": {
+        "HP": "HP",
+        "MP": "MP",
+        "IP": "IP"
+      },
+      "IGNOREAFFINITIES": {
+        "RESISTANCES": "Ignore Resistances",
+        "RESISTANCESANDIMMUNITIES": "Ignore Resistances & Immunities",
+        "ALL": "Ignore All Damage Affnities",
+        "NONE": "Apply Damage Affinities"
+      },
+      "OPERATIONS": {
+        "HP": {
+          "DECREASE": "Decrease HP By:",
+          "INCREASE": "Increase HP By:",
+          "TOMAX": "Set HP To Max",
+          "TOZERO": "Set HP To Zero",
+          "TOCRISIS": "Set HP To Crisis",
+          "TOVALUE": "Set HP To Value:"
+        },
+        "MP": {
+          "DECREASE": "Decrease MP By:",
+          "INCREASE": "Increase MP By:",
+          "TOMAX": "Set MP To Max",
+          "TOZERO": "Set MP To Zero",
+          "TOVALUE": "Set MP To Value:"
+        },
+        "IP": {
+          "DECREASE": "Decrease IP By:",
+          "INCREASE": "Increase IP By:",
+          "TOMAX": "Set IP To Max",
+          "TOZERO": "Set IP To Zero",
+          "TOVALUE": "Set IP To Value:"
+        },
+        "ZP": {
+          "ADVANCE": "Advance Zero Power Clock",
+          "RESET": "Reset Zero Power Clock",
+          "TOVALUE": "Set Zero Power Clock To:"
+        }
+      }
+    }
+  }
+}

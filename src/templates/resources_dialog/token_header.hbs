@@ -1,0 +1,11 @@
+<section id="token-header">
+  <div class="flexrow token-header">
+    {{#each actors}}
+      {{> "modules/erica-pfu-macros/templates/resources_dialog/token_item.hbs" this}}
+    {{/each}}
+  </div>
+  <button data-action="add-tokens">
+    <i class="fas fa-plus"></i>
+    {{localize "EPFU.MODIFYRESOURCES.BUTTONS.ADDTOKENS"}}
+  </button>
+</section>

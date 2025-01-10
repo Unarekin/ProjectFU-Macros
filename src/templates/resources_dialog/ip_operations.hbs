@@ -1,0 +1,16 @@
+<section id="ip-operations">
+  <div class="flexrow" data-operation-row{{#unless hasPC}} style="display:none;"{{/unless}} data-resource="ip">
+    <div class="flexrow">
+      <i class="ra ra-gear-hammer icon ip resource-icon"></i>
+      <select id="ipOperation" name="ipOperation" data-operation-type>
+        {{selectOptions ipOperationSelect localize=true}}
+      </select>
+      <div></div>
+    </div>
+    <div class="flexrow">
+      <input type="number" id="attributeIP" name="attributeIP" value="0" step="1" data-operation-value>
+      <button class="num-button" data-operation="decrement" data-field="attributeIP" title="{{localize "EPFU.MODIFYRESOURCES.BUTTONS.DECREMENT" RESOURCE=(localize "EPFU.MODIFYRESOURCES.RESOURCES.IP")}}">-</button>
+      <button class="num-button" data-operation="decrement" data-field="attributeIP" title="{{localize "EPFU.MODIFYRESOURCES.BUTTONS.INCREMENT" RESOURCE=(localize "EPFU.MODIFYRESOURCES.RESOURCES.IP")}}">+</button>
+    </div>
+  </div>
+</section>
