@@ -1,0 +1,27 @@
+{
+  "name": "Adjust Resource Points - MATT",
+  "type": "script",
+  "author": "PPShuIcaH5NYIBgf",
+  "img": "icons/svg/downgrade.svg",
+  "scope": "global",
+  "command": "/**\n * This will adjust the resource points associated with a given Miscellaneous Ability.\n * This macro expects 2 or 3 arguments passed from mATT:\n *   - Actor ID, name, UUID, token, or the Actor object itself\n *   - The ID, UUID, name or instance of the ability itself that has resource points\n *   - Optionally, you may specify just how to adjust the resource points in the following formats:\n *     #      - Add # points\n *     -#     - Subtract # points\n *     =#     - Set the point value ot #\n *     max    - Set the resource points to their maximum value\n *     step   - Add a number of points equal to the ability's step value (usually 1)\n *    -step   - Remove a number of points equal to the ability's step value (usually 1)\n *\n *    If this third argument is omitted, the macro will default to incrementing.\n *\n * This macro supports PFU versions 2.3.11 as well as 2.4.8, but does NOT support resource points\n * configured directly on an actor via their character sheet, only resource points associated with\n * a Misc Ability\n */\n\n(async () => {\n  try {\n    if (!args[0]) throw new Error(`No actor provided.`);\n    if (!args[1]) throw new Error(`No item provided.`);\n\n    const actor = await EricaPFU.coerceActor(args[0]);\n    if (!(actor instanceof Actor)) throw new Error(`Invalid actor: ${args[0]}`);\n    const item = await EricaPFU.coerceItem(actor, args[1]);\n    if (!(item instanceof Item)) throw new Error(`Invalid item: ${args[1]}`);\n\n    const rp = item.system.rp;\n\n    if (typeof rp === \"undefined\")\n      throw new Error(`Item ${item.name} does not have resource points.`);\n\n    const adjustedItem = EricaPFU.adjustProgressItem(rp, args[2]);\n    if (adjustedItem.current !== item.current) {\n      await actor.updateEmbeddedDocuments(\"Item\", [\n        {\n          _id: item.id,\n          system: {\n            rp: {\n              current: adjustedItem.current,\n            },\n          },\n        },\n      ]);\n    }\n  } catch (err) {\n    ui.notifications.error(err.message, { console: false });\n    console.error(err);\n  }\n})();\n",
+  "folder": "1PGDS68bBtlkt6o7",
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "projectfu",
+    "systemVersion": "2.4.8",
+    "createdTime": 1736402325314,
+    "modifiedTime": 1736402325314,
+    "lastModifiedBy": "PPShuIcaH5NYIBgf"
+  },
+  "_id": "B9M2hzOk7bDSaR7F",
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "PPShuIcaH5NYIBgf": 3
+  },
+  "_key": "!macros!B9M2hzOk7bDSaR7F"
+}

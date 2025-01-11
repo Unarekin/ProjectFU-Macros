@@ -1,14 +1,13 @@
 {
-  "id": "module",
-  "title": "New Module",
+  "id": "erica-pfu-macros",
+  "title": "Erica's Project FU Macros",
   "description": "",
   "version": "#{VERSION}#",
   "library": "false",
-  "manifestPlusVersion": "1.2.0",
   "compatibility": {
-    "minimum": 10,
+    "minimum": 11,
     "verified": 12,
-    "maximum": 12
+    "maximum": 13
   },
   "authors": [
     {
@@ -30,15 +29,22 @@
       "path": "languages/en.json"
     }
   ],
+  "packs": [
+    {
+      "label": "Erica's Project FU Macros",
+      "type": "Macro",
+      "name": "erica-pfu-macros",
+      "path": "packs/erica-pfu-macros",
+      "system": "projectfu",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    }
+  ],
   "url": "#{URL}#",
   "manifest": "#{MANIFEST}#",
   "download": "#{DOWNLOAD}#",
   "license": "LICENSE",
-  "readme": "README.md",
-  "media": [
-    {
-      "type": "icon",
-      "url": "https://avatars2.githubusercontent.com/u/71292812?s=400&u=ccdb4eeb7abf551ca8f314e5a9bfd0479a4d3d41&v=4"
-    }
-  ]
+  "readme": "README.md"
 }

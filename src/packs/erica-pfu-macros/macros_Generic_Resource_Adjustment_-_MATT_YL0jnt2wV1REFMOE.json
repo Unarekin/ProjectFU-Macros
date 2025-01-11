@@ -1,0 +1,27 @@
+{
+  "folder": "1PGDS68bBtlkt6o7",
+  "name": "Generic Resource Adjustment - MATT",
+  "type": "script",
+  "_id": "deOU5kcdp3pNLE17",
+  "author": "PPShuIcaH5NYIBgf",
+  "img": "icons/svg/chest.svg",
+  "scope": "global",
+  "command": "/**\n * Generic resource adjustment.  Expects the following arguments:\n * uuid: the UUID of an actor to adjust stuff for\n * resource: The resource to adjust -- hp, mp, or ip\n * adjustment: The adjustment to make.  Can take a few different forms:\n *    =#      Will set the resource to #.  ie: \"=0\" will set it to 0\n *    max     Will set the resource to its maximum value\n *    crisis  Will set the resource to 1/2 its maximum (rounded down)\n *    #       Will add # to the resource (Can also be written as +#)\n *    -#      Will subtract # from the resource\n */\n\n(async () => {\n  try {\n    const actor = EricaPFU.coerceActor(args[0]);\n    if (!(actor instanceof Actor))\n      throw new Error(`Invalid actor: ${EricaPFU.coerceString(args[0])}`);\n    const res = args[1].toLowerCase();\n    if (![\"hp\", \"mp\", \"ip\"].includes(res))\n      throw new Error(`Unknown resource: ${EricaPFU.coerceString(args[1])}`);\n    if (res === \"ip\" && actor.type !== \"character\")\n      throw new Error(\n        `Attempting to adjust IP on a non-PC actor ${actor.name}`\n      );\n\n    const adjust =\n      typeof args[2] === \"string\"\n        ? args[2].trim()\n        : typeof args[2] === \"number\"\n        ? args[2]\n        : undefined;\n    if (typeof adjust === \"undefined\")\n      throw new Error(\n        `Unknown adjustment format: ${EricaPFU.coerceString(args[2])}`\n      );\n\n    const { value, max } = actor.system.resources[res];\n\n    const adjustedAmount = EricaPFU.adjustResource(adjust, value, max, true);\n\n    if (adjustedAmount !== current) {\n      await actor.update({\n        system: {\n          resources: {\n            [res]: {\n              value: adjustedAmount,\n            },\n          },\n        },\n      });\n    }\n  } catch (err) {\n    ui.notifications?.error(err.message, { console: false });\n    console.error(err.message);\n  }\n})();\n",
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "PPShuIcaH5NYIBgf": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "projectfu",
+    "systemVersion": "2.4.8",
+    "createdTime": 1736402651726,
+    "modifiedTime": 1736402666220,
+    "lastModifiedBy": "PPShuIcaH5NYIBgf"
+  },
+  "_key": "!macros!YL0jnt2wV1REFMOE"
+}
