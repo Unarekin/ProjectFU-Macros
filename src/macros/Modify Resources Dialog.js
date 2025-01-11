@@ -207,6 +207,177 @@ try {
   /***************************************************************************
    * Templates
    **************************************************************************/
+  // #region Stylesheet
+
+  const STYLESHEET = `
+#resourcesForm {
+	--hp-color: #d1232a;
+	--mp-color: #16aad6;
+	--ip-color: #d68931;
+	--zp-color: #f7a233;
+	--token-item-width: 225px;
+	--token-image-width: 72px;
+}
+
+#resourcesForm .cancel-button {
+	color: #c70000;
+}
+
+#resourcesForm .ok-button {
+	color: #7cfc00;
+}
+
+#resourcesForm .full-width {
+	width: 100%;
+}
+
+#resourcesForm .center {
+	text-align: center;
+}
+
+#resourcesForm .right {
+	text-align: right;
+}
+
+#resourcesForm .resource-icon {
+	width: 16px;
+	max-width: 16px;
+	margin-top: 4px;
+}
+
+#resourcesForm .resource-icon.hp {
+	color: var(--hp-color);
+}
+
+#resourcesForm .resource-icon.mp {
+	color: var(--mp-color);
+}
+
+#resourcesForm .resource-icon.ip {
+	color: var(--ip-color);
+}
+
+#resourcesForm .resource-icon.zp {
+	color: var(--zp-color);
+}
+
+#resourcesForm .progress {
+	position: relative;
+	display: flex;
+	overflow: hidden;
+	padding: 0;
+	width: 100%;
+}
+
+#resourcesForm .progress .back {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	color: white;
+}
+
+#resourcesForm .progress .back.hp {
+	background-color: var(--hp-color);
+	background-image: linear-gardient(90deg, var(--hp-color), rgba(255, 255, 255, 0.5));
+}
+
+#resourcesForm .progress .back.mp {
+	background-color: var(--mp-color);
+	background-image: linear-gradient(90deg, var(--mp-color), rgba(255, 255, 255, 0.5));
+}
+
+#resourcesForm .progress .back.ip {
+	background-color: var(--ip-color);
+	background-image: linear-gradient(90deg, var(--ip-color), rgba(255, 255, 255, 0.5));
+}
+
+#resourcesForm .progress .front {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: white;
+	color: black;
+	transition: clip-path 1% linear;
+}
+
+#resourcesForm .token-item {
+	width: var(--token-item-width);
+	min-width: var(--token-item-width);
+	max-width: var(--token-item-width);
+	margin-right: 2px;
+	border: none;
+	background: inherit;
+}
+
+#resourcesForm .token-item td {
+	background: inherit;
+	padding: 0;
+}
+
+#resourcesForm .token-header {
+  min-height: 116px;
+}
+
+#resourcesForm .token-item tr {
+	background: inherit;
+}
+
+#resourcesForm .token-item .token-image {
+	width: var(--token-image-width);
+	min-width: var(--token-image-width);
+	max-width: var(--token-image-width);
+	margin: 0 10px;
+}
+
+#resourcesForm .token-item img {
+	border: none;
+	width: var(--token-image-width);
+	min-width: var(--token-image-width);
+	max-width: var(--token-image-width);
+}
+
+#resourcesForm .token-item .resource-label {
+	width: 25px;
+	padding-right: 5px;
+}
+
+#resourcesForm .leftcheck {
+	margin-left: -2px;
+}
+
+#resourcesForm .checklabel {
+	position: relative;
+	top: -4px;
+}
+
+#resourcesForm .num-button {
+  width: 32px;
+  max-width: 32px;
+  min-width: 32px;
+}
+
+#resourcesForm .remove-button {
+  position: absolute;
+  top:0;
+  left:0;
+  cursor: pointer;
+}
+
+.dialog-buttons {
+	max-height: 32px;
+}
+
+.update-card-col {
+  width: 33%;
+}
+  `;
+  // #endregion
 
   // #region Templates
 
@@ -436,6 +607,12 @@ try {
   `;
 
   const DIALOG_TEMPLATE = `
+<<<<<<< HEAD
+=======
+  <style type="text/css">
+  ${STYLESHEET}
+  </style>
+>>>>>>> develop
   {{#* inline "tokenHeader"}}${TOKEN_HEADER_TEMPLATE}{{/inline}}
   {{#* inline "resourceOperations"}}${OPERATIONS_TEMPLATE}{{/inline}}
   
