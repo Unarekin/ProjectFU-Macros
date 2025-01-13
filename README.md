@@ -4,6 +4,12 @@
 # Project FU Macros
 This is a compendium module to contain several macros I've written intended for use with the [Project FU](https://github.com/League-of-Fabulous-Developers/FoundryVTT-Fabula-Ultima) system for FoundryVTT.
 
+# Installation Instructions
+To install this module, open the "Install Add-on" window in Foundry, and paste the following URL in the "Manifest" text box at the bottom:
+```
+https://github.com/Unarekin/ProjectFU-Macros/releases/latest/download/module.json
+```
+
 # Macros Included
 
 ## MATT Macros
