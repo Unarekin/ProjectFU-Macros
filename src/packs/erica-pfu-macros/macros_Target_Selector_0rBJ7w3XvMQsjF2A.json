@@ -1,0 +1,26 @@
+{
+  "name": "Target Selector",
+  "type": "script",
+  "_id": "0rBJ7w3XvMQsjF2A",
+  "img": "icons/svg/dice-target.svg",
+  "author": "PPShuIcaH5NYIBgf",
+  "scope": "global",
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "PPShuIcaH5NYIBgf": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "projectfu",
+    "systemVersion": "2.4.8",
+    "createdTime": 1741929403279,
+    "modifiedTime": 1741929475827,
+    "lastModifiedBy": "PPShuIcaH5NYIBgf"
+  },
+  "_key": "!macros!0rBJ7w3XvMQsjF2A",
+  "command": "/**\n * Attempts to somewhat intelligently select a random target (or targets)\n * for an NPC's attack/spell sort of things.\n */\n\nif (!(game.combat instanceof Combat)) {\n  ui.notifications.error(\"EPFU.ERRORS.NOCOMBAT\", { localize: true});\n  return\n}\n\nif (!foundry.applications.api.ApplicationV2) {\n  ui.notifications.error(\"EPFU.ERRORS.NOTV12\", {localize: true});\n  return;\n}\n\nnew EricaPFU.TargetSelectorApplication().render({force: true})"
+}

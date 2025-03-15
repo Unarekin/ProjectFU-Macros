@@ -1,0 +1,16 @@
+<section>
+  <div class="no-combatants">{{localize "EPFU.DIALOGS.TARGETSELECTOR.NOCOMBATANTS"}}</div>
+  {{#each combatants}}
+    <section data-combatant="{{id}}" data-token="{{tokenId}}" data-actor="{{actorId}}" data-disposition="{{disposition}}" data-action="toggleCombatant">
+      <div class="combatant flexrow" title="{{localize "EPFU.DIALOGS.TARGETSELECTOR.TOGGLE"}}">
+        <div class="token-image" style='background-image: url("{{img}}")'></div>
+        <div class="flexcol">
+          <strong>{{name}}</strong>
+          <div>HP: {{hp.value}} / {{hp.max}}</div>
+          <div>MP: {{mp.value}} / {{mp.max}}</div>
+          <div class="flex1"></div>
+        </div>
+      </div>
+    </section>
+  {{/each}}
+</section>

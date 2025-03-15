@@ -1,0 +1,8 @@
+{
+  "EPFU": {
+    "ERRORS": {
+      "NOCOMBAT": "No active combat.",
+      "NOTV12": "This macro only supports Foundry v12 or newer."
+    }
+  }
+}

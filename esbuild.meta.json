@@ -21,8 +21,30 @@
       ],
       "format": "esm"
     },
+    "src/applications/TargetSelectorApplication.ts": {
+      "bytes": 7844,
+      "imports": [
+        {
+          "path": "Foundry-VTT/src/types/utils.mjs",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "src/applications/index.ts": {
+      "bytes": 45,
+      "imports": [
+        {
+          "path": "src/applications/TargetSelectorApplication.ts",
+          "kind": "import-statement",
+          "original": "./TargetSelectorApplication"
+        }
+      ],
+      "format": "esm"
+    },
     "src/module.ts": {
-      "bytes": 390,
+      "bytes": 477,
       "imports": [
         {
           "path": "src/coercion.ts",
@@ -33,12 +55,17 @@
           "path": "src/functions.ts",
           "kind": "import-statement",
           "original": "./functions"
+        },
+        {
+          "path": "src/applications/index.ts",
+          "kind": "import-statement",
+          "original": "./applications"
         }
       ],
       "format": "esm"
     },
     "src/styles/module.scss": {
-      "bytes": 244,
+      "bytes": 1961,
       "imports": []
     }
   },
@@ -47,7 +74,7 @@
       "imports": [],
       "exports": [],
       "inputs": {},
-      "bytes": 8058
+      "bytes": 20203
     },
     "dist/module.js": {
       "imports": [],
@@ -60,27 +87,33 @@
         "src/functions.ts": {
           "bytesInOutput": 1433
         },
+        "src/applications/TargetSelectorApplication.ts": {
+          "bytesInOutput": 7004
+        },
+        "src/applications/index.ts": {
+          "bytesInOutput": 0
+        },
         "src/module.ts": {
-          "bytesInOutput": 140
+          "bytesInOutput": 171
         }
       },
-      "bytes": 3488
+      "bytes": 10575
     },
     "dist/styles/module.css.map": {
       "imports": [],
       "exports": [],
       "inputs": {},
-      "bytes": 93
+      "bytes": 1259
     },
     "dist/styles/module.css": {
       "imports": [],
       "entryPoint": "src/styles/module.scss",
       "inputs": {
         "src/styles/module.scss": {
-          "bytesInOutput": 0
+          "bytesInOutput": 590
         }
       },
-      "bytes": 68
+      "bytes": 658
     }
   }
 }
