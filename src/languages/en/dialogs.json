@@ -1,0 +1,20 @@
+{
+  "EPFU": {
+    "DIALOGS": {
+      "TARGETSELECTOR": {
+        "TITLE": "Target Selector",
+        "DISPOSITION": "Combatant Disposition",
+        "NOCOMBATANTS": "No combatants to show",
+        "QUANTITY": "Quantity",
+        "RANDOMIZE": "Randomize",
+        "TOGGLE": "Toggle Selection",
+        "DISPOSITIONS": {
+          "FRIENDLY": "Friendly",
+          "HOSTILE": "Hostile",
+          "NEUTRAL": "Neutral",
+          "SECRET": "Secret"
+        }
+      }
+    }
+  }
+}

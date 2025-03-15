@@ -1,5 +1,6 @@
 import { coerceActor, coerceItem, coerceString, findZeroPower } from './coercion';
 import { adjustProgressItem, adjustResource } from './functions';
+import { TargetSelectorApplication} from "./applications"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
 (window as any).EricaPFU = {
@@ -8,5 +9,6 @@ import { adjustProgressItem, adjustResource } from './functions';
   findZeroPower,
   adjustProgressItem,
   adjustResource,
-  coerceString
+  coerceString,
+  TargetSelectorApplication
 };
