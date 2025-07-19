@@ -40,8 +40,9 @@ export class TargetSelectorApplication extends foundry.applications.api.Handleba
 
   static onFormSubmit(this: TargetSelectorApplication, event: Event, form: HTMLFormElement, data: FormDataExtended) {
     const selected = Array.isArray(data.object.selected) ? data.object.selected : data.object.selected ? [data.object.selected] : [];
-    if (game.user instanceof User)
-      game.user.updateTokenTargets(selected as string[]);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
+    if (game.user instanceof User && canvas?.tokens) (canvas.tokens as any).setTargets(selected);
+    // game.user.updateTokenTargets(selected as string[]);
   }
 
   static onToggleCombatant(this: TargetSelectorApplication, e: Event, element: HTMLElement) {
@@ -60,7 +61,7 @@ export class TargetSelectorApplication extends foundry.applications.api.Handleba
     const container = this.element.querySelector(`[data-role="selected-items"]`);
     if (!(container instanceof HTMLElement)) return;
 
-    container.innerHTML="";
+    container.innerHTML = "";
     const selected = this.element.querySelectorAll(`[data-combatant]:has(.selected)`) as unknown as HTMLElement[];
     for (const item of selected) {
       const input = document.createElement("input");
@@ -81,12 +82,12 @@ export class TargetSelectorApplication extends foundry.applications.api.Handleba
       const disposition = parseInt(dispo.value);
       const combatants = this.knownCombatants.filter(combatant => combatant.disposition === disposition);
       // Shuffle
-      for (let i=combatants.length-1;i>0;i--) {
+      for (let i = combatants.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [combatants[i], combatants[j]] = [combatants[j], combatants[i]];
       }
       // Grab first N
-      const selected = combatants.slice(0,qty);
+      const selected = combatants.slice(0, qty);
 
       // Highlight selected tokens
       const combatantElements = this.element.querySelectorAll(`.combatant`);
@@ -143,14 +144,14 @@ export class TargetSelectorApplication extends foundry.applications.api.Handleba
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const combatants = Array.from(this.element.querySelectorAll(`[data-combatant]`)) as HTMLElement[];
     const hasCombatants = combatants.some(item => item.dataset.disposition === `${disposition}`);
-    
+
     const hasNone = this.element.querySelector(`.no-combatants`);
 
     console.log("Element:", hasNone);
 
     if (hasNone instanceof HTMLElement) {
-      if (hasCombatants) hasNone.style.display="none";
-      else hasNone.style.display="flex";
+      if (hasCombatants) hasNone.style.display = "none";
+      else hasNone.style.display = "flex";
     }
 
     for (const combatant of combatants) {
@@ -169,7 +170,7 @@ export class TargetSelectorApplication extends foundry.applications.api.Handleba
   protected async _prepareContext(options: { force?: boolean | undefined; position?: { top?: number | undefined; left?: number | undefined; width?: number | "auto" | undefined; height?: number | "auto" | undefined; scale?: number | undefined; zIndex?: number | undefined; } | undefined; window?: { title?: string | undefined; icon?: string | false | undefined; controls?: boolean | undefined; } | undefined; parts?: string[] | undefined; isFirstRender?: boolean | undefined; }): Promise<EmptyObject> {
     const context = await super._prepareContext(options);
 
-    this.knownCombatants=(game.combat?.combatants?.contents.map(combatant => this.parseCombatant(combatant))) ?? [];
+    this.knownCombatants = (game.combat?.combatants?.contents.map(combatant => this.parseCombatant(combatant))) ?? [];
 
     return {
       ...context,
