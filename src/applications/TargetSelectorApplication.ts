@@ -119,6 +119,7 @@ export class TargetSelectorApplication extends foundry.applications.api.Handleba
 
 
   protected getCombatantResource(combatant: Combatant, resource: string): Resource {
+    console.log("Parsing combatant:", resource, combatant);
     return {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
       value: (combatant.actor?.system as any)?.resources?.[resource].value ?? 0,
@@ -134,7 +135,6 @@ export class TargetSelectorApplication extends foundry.applications.api.Handleba
       img: combatant.img?.replaceAll("'", "\\'") ?? "",
       hp: this.getCombatantResource(combatant, "hp") ?? { value: 0, max: 0 },
       mp: this.getCombatantResource(combatant, "mp") ?? { value: 0, max: 0 },
-      ip: this.getCombatantResource(combatant, "ip") ?? { value: 0, max: 0 },
       actorId: combatant.actor?.id ?? "",
       disposition: combatant.token?.disposition ?? CONST.TOKEN_DISPOSITIONS.HOSTILE,
       tokenId: combatant.tokenId ?? ""
@@ -186,7 +186,7 @@ export class TargetSelectorApplication extends foundry.applications.api.Handleba
       },
       buttons: [
         { icon: "fas fa-times", label: "Cancel", action: "cancel", type: "button" },
-        { icon: "fas fa-bullseye", label: "FU.Target", action: "target", type: "button" }
+        { icon: "fas fa-bullseye", label: "FU.Target", action: "target", type: "submit" }
       ]
     };
   }
@@ -207,7 +207,6 @@ interface SimpleCombatant {
   name: string;
   hp: Resource;
   mp: Resource;
-  ip: Resource;
   img: string;
   actorId: string;
   disposition: CONST.TOKEN_DISPOSITIONS;
