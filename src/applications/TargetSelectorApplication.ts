@@ -119,7 +119,6 @@ export class TargetSelectorApplication extends foundry.applications.api.Handleba
 
 
   protected getCombatantResource(combatant: Combatant, resource: string): Resource {
-    console.log("Parsing combatant:", resource, combatant);
     return {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
       value: (combatant.actor?.system as any)?.resources?.[resource].value ?? 0,
