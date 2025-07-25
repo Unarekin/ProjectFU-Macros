@@ -1,0 +1,26 @@
+<table class="token-item" data-id="{{token.id}}" data-role="token">
+  <tr>
+    <td rowspan="4" class="token-image">
+      <a
+        data-action="removeToken"
+        data-id="{{token.id}}"
+        title="{{localize
+          'EPFU.DIALOGS.RESOURCEMODIFIER.BUTTONS.REMOVE'
+          name=token.name
+        }}"
+        class="remove-button"
+      >
+        <i class="fa-solid fa-circle-xmark"></i>
+      </a>
+      <img src="{{token.image}}" class="token-image" />
+    </td>
+    <th colspan="2">{{token.name}}</th>
+  </tr>
+  {{> "modules/erica-pfu-macros/templates/resource-modifier/resource-item.hbs" token.hp class="hp"}}
+  {{> "modules/erica-pfu-macros/templates/resource-modifier/resource-item.hbs" token.mp class="mp"}}
+  {{#if isPC}}
+    {{> "modules/erica-pfu-macros/templates/resource-modifier/resource-item.hbs" token.ip class="ip"}}
+  {{ else }}
+    <tr class="resource-row"><td><br></td></tr>
+  {{/if}}
+</table>

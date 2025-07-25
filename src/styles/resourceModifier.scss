@@ -1,0 +1,104 @@
+.epfu {
+  &.resourcemodifier {
+    --hp-color: #d1232a;
+    --mp-color: #16aad6;
+    --ip-color: #d68931;
+    --zp-color: #f7a233;
+    --token-item-width: 225px;
+    --token-image-size: 72px;
+
+    .token-list {
+      overflow-y: auto;
+    }
+
+    .token-item {
+      width: var(--token-item-width);
+      float: left;
+
+      .resource-label {
+        width: 25px;
+        padding-right: 5px;
+      }
+    }
+
+    .progress {
+      position: relative;
+      display: flex;
+      overflow: hidden;
+      padding: 0;
+      width: 100%;
+
+      .back {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        color: white;
+
+        &.hp {
+          background-color: var(--hp-color);
+          background-image: linear-gardient(
+            90deg,
+            var(--hp-color),
+            rgba(255, 255, 255, 0.5)
+          );
+        }
+
+        &.mp {
+          background-color: var(--mp-color);
+          background-image: linear-gardient(
+            90deg,
+            var(--mp-color),
+            rgba(255, 255, 255, 0.5)
+          );
+        }
+
+        &.ip {
+          background-color: var(--ip-color);
+          background-image: linear-gardient(
+            90deg,
+            var(--ip-color),
+            rgba(255, 255, 255, 0.5)
+          );
+        }
+      }
+
+      .front {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background: white;
+        color: black;
+        transition: clip-path 1% linear;
+      }
+    }
+
+    td.token-image {
+      position: relative;
+      width: var(--token-image-size);
+    }
+
+    img.token-image {
+      max-width: var(--token-image-size);
+      max-height: var(--token-image-size);
+      width: var(--token-image-width);
+      margin: 0 10px;
+    }
+
+    .remove-button {
+    }
+
+    .resource-row {
+      background: inherit;
+
+      td {
+        padding: 0;
+      }
+    }
+  }
+}

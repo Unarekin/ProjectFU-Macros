@@ -1,0 +1,36 @@
+.epfu {
+  &.targetselection {
+    .gap {
+      &:first-child {
+        padding-right: 3px;
+      }
+    }
+
+    .no-combatants {
+      height: 128px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .combatant {
+      width: 50%;
+      float: left;
+      box-sizing: border-box;
+      cursor: pointer;
+
+      &.selected {
+        // background: rgba(51, 188, 78, .25);
+        background: rgba(231, 33, 36, 0.25);
+      }
+
+      .token-image {
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: contain;
+
+        height: 64px;
+      }
+    }
+  }
+}

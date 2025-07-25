@@ -14,6 +14,22 @@
           "NEUTRAL": "Neutral",
           "SECRET": "Secret"
         }
+      },
+      "TOKENSELECTOR": {
+        "TITLE": "Add Token(s)",
+        "MESSAGE": "Please select one or more tokens in the scene, and hit 'Ok' when done."
+      },
+      "RESOURCEMODIFIER": {
+        "TITLE": "Modify Resources",
+        "BUTTONS": {
+          "APPLY": "Apply",
+          "REMOVE": "Remove {name}",
+          "ADDTOKENS": "Add Token(s)"
+        },
+        "REMOVECONFIRM": {
+          "TITLE": "Remove {name}",
+          "MESSAGE": "Are you sure you wish to remove {name}?  This cannot be undone."
+        }
       }
     }
   }
