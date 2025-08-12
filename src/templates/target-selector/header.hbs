@@ -1,16 +1,33 @@
 <section>
   <div class="flexrow gap">
     <div class="form-group">
-      <label for="disposition">{{localize "EPFU.DIALOGS.TARGETSELECTOR.DISPOSITION"}}</label>
-      <select name="disposition" id="disposition" data-action="changeDisposition">
+      <label for="disposition">{{localize
+          "EPFU.DIALOGS.TARGETSELECTOR.DISPOSITION"
+        }}</label>
+      <select
+        name="disposition"
+        id="disposition"
+        data-action="changeDisposition"
+      >
         {{selectOptions dispositionSelect localize=true selected=disposition}}
       </select>
     </div>
     <div class="form-group">
-      <label for="quantity">{{localize "EPFU.DIALOGS.TARGETSELECTOR.QUANTITY"}}</label>
-      <input type="number" name="quantity" id="quantity" value="{{quantity}}" min="1" step="1">
+      <label for="quantity">{{localize
+          "EPFU.DIALOGS.TARGETSELECTOR.QUANTITY"
+        }}</label>
+      <input
+        type="number"
+        name="quantity"
+        id="quantity"
+        value="{{quantity}}"
+        min="1"
+        step="1"
+      />
     </div>
   </div>
-  <button type="button" data-action="randomize"><i class="fas fa-dice"></i>{{localize "EPFU.DIALOGS.TARGETSELECTOR.RANDOMIZE"}}</button>
+  <button type="button" data-action="randomize"><i
+      class="fas fa-dice"
+    ></i>{{localize "EPFU.DIALOGS.TARGETSELECTOR.RANDOMIZE"}}</button>
   <section data-role="selected-items"></section>
 </section>

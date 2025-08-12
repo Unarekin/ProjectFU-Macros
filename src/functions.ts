@@ -40,3 +40,7 @@ export function adjustResource(adjust: string | number, current: number, max: nu
   if (isNaN(parse)) throw new Error(`Non-numeric value: ${coerceString(adjust)}`);
   return clamp(current + parse, 0, max, shouldClamp);
 }
+
+export function hasFlag(value: number, flag: number): boolean {
+  return (value & flag) === flag;
+}

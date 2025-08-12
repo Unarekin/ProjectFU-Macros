@@ -1,0 +1,17 @@
+<div class="flex1 flexcol">
+  <div class="flex1 token-list">
+    {{#unless selectedItems.length}}
+      <div class="no-tokens">{{localize "EPFU.DIALOGS.RESOURCEMODIFIER.NOTOKENS"}}</div>
+    {{/unless}}
+    {{#each selectedItems as |token|}}
+      {{> "modules/erica-pfu-macros/templates/resource-modifier/token-item.hbs" token=token}}
+    {{/each}}
+  </div>
+  <div class="flex0">
+    <button type="button" data-action="addTokens" class="full-width">
+      <i class="fa-solid fa-plus"></i>
+      {{localize "EPFU.DIALOGS.RESOURCEMODIFIER.BUTTONS.ADDTOKENS"}}
+    </button>
+    <hr>
+  </div>
+</div>

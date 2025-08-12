@@ -1,0 +1,23 @@
+.epfu {
+  &.tokenselector {
+    .token-list {
+      display: flex;
+      gap: 20px;
+    }
+
+    .token-item {
+      width: 72px;
+      display: inline-block;
+    }
+
+    .token-name {
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .token-image {
+      max-width: 72px;
+      max-height: 72px;
+    }
+  }
+}
