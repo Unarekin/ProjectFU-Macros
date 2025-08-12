@@ -1,3 +1,178 @@
-<section data-role="resource-actions">
+<div data-role="resource-actions">
+  <!-- HP -->
+  <div class="flexrow resource-row" data-resource="hp">
+    <div class="flexrow">
+      <i class="fa-solid fa-heart-crack hp resource-icon"></i>
+      <select id="hpOperation" name="hpOperation">
+        {{selectOptions hpOperationSelect localize=true}}
+      </select>
+      <div></div>
+    </div>
+    <div class="flexrow" style="gap:5px;">
+      <input
+        type="number"
+        id="attributeHP"
+        name="attributeHP"
+        value="0"
+        step="1"
+        autofocus
+      />
+      <div>
+        <select id="damageType" name="damageType" class="full-width">
+          {{selectOptions damageTypeSelect localize=true}}
+        </select>
+      </div>
+      <div>
+        <select
+          id="ignoreAffinities"
+          name="ignoreAffinities"
+          class="full-width"
+        >
+          {{selectOptions ignoreAffinitiesSelect localize=true}}
+        </select>
+      </div>
+      <button
+        class="num-button"
+        data-action="decrementField"
+        data-field="attributeHP"
+        type="button"
+        title="{{localize 'EPFU.DIALOGS.RESOURCEMODIFIER.BUTTONS.DECREMENT'}}"
+      >-</button>
+      <button
+        class="num-button"
+        data-action="incrementField"
+        data-field="attributeHP"
+        type="button"
+        title="{{localize 'EPFU.DIALOGS.RESOURCEMODIFIER.BUTTONS.INCREMENT'}}"
+      >+</button>
+    </div>
+  </div>
 
-</section>
+  <!-- MP -->
+  <div class="flexrow resource-row" data-resource="mp">
+    <div class="flexrow">
+      <i class="fa-solid fa-hat-wizard mp resource-icon"></i>
+      <select id="mpOperation" name="mpOperation">
+        {{selectOptions mpOperationSelect localize=true}}
+      </select>
+      <div></div>
+    </div>
+    <div class="flexrow" style="gap:5px;">
+      <input
+        type="number"
+        id="attributeMP"
+        name="attributeMP"
+        value="0"
+        step="1"
+      />
+      <button
+        class="num-button"
+        type="button"
+        data-action="decrementField"
+        data-field="attributeMP"
+        title="{{localize 'EPFU.DIALOGS.RESOURCEMODIFIER.BUTTONS.DECREMENT'}}"
+      >-</button>
+      <button
+        class="num-button"
+        type="button"
+        data-action="incrementField"
+        data-field="attributeMP"
+        title="{{localize 'EPFU.DIALOGS.RESOURCEMODIFIER.BUTTONS.INCREMENT'}}"
+      >+</button>
+    </div>
+  </div>
+  <!-- IP -->
+  {{#if hasPC}}
+    <div class="flexrow resource-row" data-resource="ip">
+      <div class="flexrow">
+        <i class="ra ra-gear-hammer ip resource-icon"></i>
+        <select id="ipOperation" name="ipOperation">
+          {{selectOptions ipOperationSelect localize=true}}
+        </select>
+        <div></div>
+      </div>
+      <div class="flexrow" style="gap:5px;">
+        <input
+          type="number"
+          id="attributeIP"
+          name="attributeIP"
+          value="0"
+          step="1"
+        />
+        <button
+          class="num-button"
+          type="button"
+          data-action="decrementField"
+          data-field="attributeIP"
+          title="{{localize 'EPFU.DIALOGS.RESOURCEMODIFIER.BUTTONS.DECREMENT'}}"
+        >-</button>
+        <button
+          class="num-button"
+          type="button"
+          data-action="incrementField"
+          data-field="attributeIP"
+          title="{{localize 'EPFU.DIALOGS.RESOURCEMODIFIER.BUTTONS.INCREMENT'}}"
+        >+</button>
+      </div>
+    </div>
+  {{/if}}
+  <!-- ZP -->
+  {{#if hasZP}}
+    <div class="flexrow resource-row" data-resource="zp">
+      <div class="flexrow">
+        <i class="fa-solid fa-bolt zp resource-icon"></i>
+        <select id="zpOperation" name="zpOperation">
+          {{selectOptions zpOperationSelect localize=true}}
+        </select>
+        <div></div>
+      </div>
+      <div class="flexrow" style="gap:5px;">
+        <input
+          type="number"
+          id="attributeZP"
+          name="attributeZP"
+          value="0"
+          step="1"
+        />
+        <button
+          class="num-button"
+          type="button"
+          data-action="decrementField"
+          data-field="attributeZP"
+          title="{{localize 'EPFU.DIALOGS.RESOURCEMODIFIER.BUTTONS.DECREMENT'}}"
+        >-</button>
+        <button
+          class="num-button"
+          type="button"
+          data-action="incrementField"
+          data-field="attributeZP"
+          title="{{localize 'EPFU.DIALOGS.RESOURCEMODIFIER.BUTTONS.INCREMENT'}}"
+        >+</button>
+      </div>
+    </div>
+  {{/if}}
+  <div class="flexrow">
+    <div>
+      <input
+        type="checkbox"
+        name="allToMax"
+        id="allToMax"
+        style="margin-left:-4px;"
+      />
+      <label for="allToMax">{{localize
+          "EPFU.DIALOGS.RESOURCEMODIFIER.OPERATIONS.ALLTOMAX"
+        }}</label>
+    </div>
+    <div>
+      <input
+        type="checkbox"
+        name="bypassClamping"
+        id="bypassClamping"
+        style="margin-left:-2px"
+      />
+      <label for="bypassClamping">{{localize
+          "EPFU.DIALOGS.RESOURCEMODIFIER.OPERATIONS.BYPASSCLAMPING"
+        }}</label>
+    </div>
+  </div>
+</div>

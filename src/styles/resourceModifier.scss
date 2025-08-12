@@ -7,6 +7,17 @@
     --token-item-width: 225px;
     --token-image-size: 72px;
 
+    .resource-row {
+      padding-top: 4px;
+    }
+
+    .no-tokens {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 137.5px;
+    }
+
     .token-list {
       overflow-y: auto;
     }
@@ -18,6 +29,34 @@
       .resource-label {
         width: 25px;
         padding-right: 5px;
+      }
+    }
+
+    .num-button {
+      width: 32px;
+      max-width: 32px;
+      min-width: 32px;
+    }
+
+    .resource-icon {
+      width: 16px;
+      max-width: 16px;
+      margin-top: 4px;
+
+      &.hp {
+        color: var(--hp-color);
+      }
+
+      &.mp {
+        color: var(--mp-color);
+      }
+
+      &.ip {
+        color: var(--ip-color);
+      }
+
+      &.zp {
+        color: var(--zp-color);
       }
     }
 

@@ -21,10 +21,29 @@
       },
       "RESOURCEMODIFIER": {
         "TITLE": "Modify Resources",
+        "NOTOKENS": "No items to display",
+        "OPERATIONS": {
+          "INCREASE": "Increase {resource} By:",
+          "DECREASE": "Decrease {resource} By:",
+          "TOMAX": "Set {resource} to Max",
+          "TOZERO": "Set {resource} to Zero",
+          "TOCRISIS": "Set {resource} to Crisis Value",
+          "TOVALUE": "Set {resource} to:",
+          "ALLTOMAX": "Set HP/MP/IP To Max",
+          "BYPASSCLAMPING": "Bypass Value Clamping"
+        },
         "BUTTONS": {
           "APPLY": "Apply",
           "REMOVE": "Remove {name}",
-          "ADDTOKENS": "Add Token(s)"
+          "ADDTOKENS": "Add Token(s)",
+          "DECREMENT": "Decrement Resource",
+          "INCREMENT": "Increment Resource"
+        },
+        "IGNOREAFFINITIES": {
+          "NONE": "Apply Damage Affinities",
+          "RESISTANCES": "Ignore Resistances",
+          "RESISTANCESANDIMMUNITIES": "Ignore Resistances and Immunities",
+          "ALL": "Ignore Damage Affinities"
         },
         "REMOVECONFIRM": {
           "TITLE": "Remove {name}",

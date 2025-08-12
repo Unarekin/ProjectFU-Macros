@@ -1,5 +1,8 @@
 <div class="flex1 flexcol">
   <div class="flex1 token-list">
+    {{#unless selectedItems.length}}
+      <div class="no-tokens">{{localize "EPFU.DIALOGS.RESOURCEMODIFIER.NOTOKENS"}}</div>
+    {{/unless}}
     {{#each selectedItems as |token|}}
       {{> "modules/erica-pfu-macros/templates/resource-modifier/token-item.hbs" token=token}}
     {{/each}}

@@ -20,3 +20,14 @@ export enum IgnoreAffinity {
 
 export const ResourceTypes: string[] = ["hp", "mp", "ip", "zp"];
 export type RESOURCE_TYPE = typeof ResourceTypes[number];
+
+export enum DamageAffinity {
+  Vulnerable = -1,
+  None = 0,
+  Resistance = 1,
+  Immunity = 2,
+  Absorption = 3
+}
+
+export const ResourceAbbrs: string[] = ["hp", "mp", "ip", "zp"] as const;
+export type ResourceAbbreviation = typeof ResourceAbbrs[number];

@@ -33,7 +33,6 @@ export class TokenSelectorApplication extends foundry.applications.api.Handlebar
   }
 
   readonly #hookId: number;
-  // eslint-disable-next-line no-unused-private-class-members
   readonly #callback: TokenSelectorCallback;
 
   protected _onClose(options: foundry.applications.api.ApplicationV2.RenderOptions): void {
