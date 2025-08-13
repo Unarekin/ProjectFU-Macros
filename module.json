@@ -5,7 +5,7 @@
   "version": "#{VERSION}#",
   "library": "false",
   "compatibility": {
-    "minimum": 11,
+    "minimum": 13,
     "verified": 13,
     "maximum": 13
   },
@@ -17,7 +17,15 @@
     }
   ],
   "relationships": {
-    "systems": [],
+    "systems": [
+      {
+        "id": "projectfu",
+        "compatibility": {
+          "minimum": "4.0.0",
+          "verified": "4.0.0"
+        }
+      }
+    ],
     "requires": []
   },
   "esmodules": ["module.js"],
