@@ -1,0 +1,11 @@
+<section>
+  <div class="form-group">
+    <label for="actorSelect">{{localize "DOCUMENT.Actor"}}</label>
+    <select name="actorSelect" id="actorSelect">
+      <option value=""></option>
+      {{#each actors as |actor|}}
+        <option value="{{actor.uuid}}">{{actor.name}}</option>
+      {{/each}}
+    </select>
+  </div>
+</section>

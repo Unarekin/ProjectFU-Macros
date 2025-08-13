@@ -1,0 +1,20 @@
+{
+  "EPFU": {
+    "ACTORSELECT": {
+      "TITLE": "Actor Selector"
+    },
+    "ANIMATIONCONFIG": {
+      "TITLE": "Sprite Animation Configuration: {name}",
+      "DEFAULT": "Default Animation",
+      "DEFAULTHINT": "The animation to play after any hit/miss animation completes.",
+      "HIT": "Hit Animation",
+      "HITHINT": "The animation to play when this object is hit by an attack.",
+      "HITDELAY": "Hit Delay",
+      "HITDELAYHINT": "Milliseconds between start of animation and expected point of impact.",
+      "MISS": "Miss Animation",
+      "MISSHINT": "The animation to play whent his object is missed by an attack.",
+      "MISSDELAY": "Miss Delay",
+      "MISSDELAYHINT": "Milliseconds between start of animation and expected point of impact."
+    }
+  }
+}

@@ -44,3 +44,45 @@ export function adjustResource(adjust: string | number, current: number, max: nu
 export function hasFlag(value: number, flag: number): boolean {
   return (value & flag) === flag;
 }
+
+export async function selectActor(): Promise<Actor | undefined> {
+  const content = await foundry.applications.handlebars.renderTemplate(`modules/${__MODULE_ID__}/templates/actor-selector.hbs`, {
+    actors: (game.actors?.contents ?? []).map(actor => ({ uuid: actor.uuid, name: actor.name }))
+  });
+  return new Promise<Actor | undefined>(resolve => {
+    void foundry.applications.api.DialogV2.wait({
+      window: {
+        title: "EPFU.ACTORSELECT.TITLE",
+        icon: "fa-solid fa-user"
+      },
+      content,
+      buttons: [
+        {
+          type: "button",
+          action: "cancel",
+          label: "Cancel",
+          icon: "fa-solid fa-times",
+        },
+        {
+          type: "submit",
+          action: "ok",
+          label: "Confirm",
+          icon: "fa-solid fa-check",
+          callback: (e, button, dialog) => {
+            const form = dialog.element.querySelector("form");
+            if (form instanceof HTMLFormElement)
+              return foundry.utils.expandObject((new foundry.applications.ux.FormDataExtended(form)).object);
+          },
+        },
+      ],
+      submit: (result) => {
+        if (result === "cancel" || !result) resolve(undefined);
+
+        const actor = fromUuidSync<Actor>((result as Record<string, string>).actorSelect);
+        if (actor instanceof Actor) resolve(actor);
+        resolve(undefined);
+        return Promise.resolve();
+      },
+    })
+  })
+}

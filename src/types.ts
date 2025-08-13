@@ -31,3 +31,11 @@ export enum DamageAffinity {
 
 export const ResourceAbbrs: string[] = ["hp", "mp", "ip", "zp"] as const;
 export type ResourceAbbreviation = typeof ResourceAbbrs[number];
+
+export interface AnimationConfiguration {
+  hitAnimation: string;
+  missAnimation: string;
+  hitDelay: number;
+  missDelay: number;
+  defaultAnimation: string;
+}
