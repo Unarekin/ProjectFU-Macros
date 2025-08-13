@@ -2,7 +2,10 @@
   "EPFU": {
     "ERRORS": {
       "NOCOMBAT": "No active combat.",
-      "NOTV12": "This macro only supports Foundry v12 or newer."
+      "NOTV12": "This macro only supports Foundry v12 or newer.",
+      "NOACTOR": "No actor specified",
+      "NOTARGET": "No object selected",
+      "NOSPRITEANIMATIONS": "This feature requires that the Sprite Animations module be installed and active."
     }
   }
 }

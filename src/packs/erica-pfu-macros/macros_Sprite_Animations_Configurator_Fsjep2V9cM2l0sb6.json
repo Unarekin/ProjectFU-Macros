@@ -1,0 +1,26 @@
+{
+  "name": "Sprite Animations Configurator",
+  "type": "script",
+  "_id": "Fsjep2V9cM2l0sb6",
+  "img": "icons/svg/walk.svg",
+  "author": "PPShuIcaH5NYIBgf",
+  "scope": "global",
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "PPShuIcaH5NYIBgf": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "projectfu",
+    "systemVersion": "2.4.8",
+    "createdTime": 1741929403279,
+    "modifiedTime": 1741929475827,
+    "lastModifiedBy": "PPShuIcaH5NYIBgf"
+  },
+  "_key": "!macros!Fsjep2V9cM2l0sb6",
+  "command": "/**\n * Sprite Animations Attack Macro Configuration\n *\n * This macro provides a simple dialog to configure some standard\n * animations for a given actor or tile.\n */\n\ntry {\n  const controlled = [...canvas.tokens.controlled, ...canvas.tiles.controlled];\n  let target = controlled[0]?.actor ? controlled[0].actor : controlled[0];\n\n  if (!target) target = await EricaPFU.selectActor();\n\n  if (!target) throw new Error(game.i18n.localize(\"EPFU.ERRORS.NOTARGET\"));\n\n  const app = new EricaPFU.AnimationConfigurationApplication({ target });\n  await app.render(true);\n} catch (err) {\n  console.error(err);\n  if (err instanceof Error)\n    ui.notifications.error(err.message, { console: false, localize: true });\n}\n"
+}

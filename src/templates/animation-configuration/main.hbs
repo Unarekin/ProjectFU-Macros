@@ -1,0 +1,57 @@
+<section>
+  <div class="form-group">
+    <label for="defaultAnimation">{{localize
+        "EPFU.ANIMATIONCONFIG.DEFAULT"
+      }}</label>
+    <select name="defaultAnimation" id="defaultAnimation">
+      <option value=""></option>
+      {{selectOptions animationSelect selected=flags.defaultAnimation}}
+    </select>
+  </div>
+  <p class="hint">{{localize "EPFU.ANIMATIONCONFIG.DEFAULTHINT"}}</p>
+
+  <div class="form-group">
+    <label for="hitAnimation">{{localize "EPFU.ANIMATIONCONFIG.HIT"}}</label>
+    <select name="hitAnimation" id="hitAnimation">
+      <option value=""></option>
+      {{selectOptions animationSelect selected=flags.hitAnimation}}
+    </select>
+  </div>
+  <p class="hint">{{localize "EPFU.ANIMATIONCONFIG.HITHINT"}}</p>
+
+  <div class="form-group">
+    <label for="hitDelay">{{localize "EPFU.ANIMATIONCONFIG.HITDELAY"}}</label>
+    <input
+      type="number"
+      value="{{flags.hitDelay}}"
+      step="1"
+      min="0"
+      name="hitDelay"
+      id="hitDelay"
+    />
+  </div>
+  <p class="hint">{{localize "EPFU.ANIMATIONCONFIG.HITDELAYHINT"}}</p>
+
+  <div class="form-group">
+    <label for="missAnimation">{{localize "EPFU.ANIMATIONCONFIG.MISS"}}</label>
+    <select name="missAnimation" id="missAnimation">
+      <option value=""></option>
+      {{selectOptions animationSelect selected=flags.missAnimation}}
+    </select>
+  </div>
+  <p class="hint">{{localize "EPFU.ANIMATIONCONFIG.MISSHINT"}}</p>
+
+  <div class="form-group">
+    <label for="missDelay">{{localize "EPFU.ANIMATIONCONFIG.MISSDELAY"}}</label>
+    <input
+      type="number"
+      value="{{flags.missDelay}}"
+      step="1"
+      min="0"
+      name="missDelay"
+      id="missDelay"
+    />
+  </div>
+  <p class="hint">{{localize "EPFU.ANIMATIONCONFIG.MISSDELAYHINT"}}</p>
+
+</section>

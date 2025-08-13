@@ -1,0 +1,8 @@
+<section data-role="token-selector">
+  {{localize "EPFU.DIALOGS.TOKENSELECTOR.MESSAGE"}}
+  <section data-role="token-list">
+    {{#each tokens as |token|}}
+      {{> "modules/erica-pfu-macros/templates/token-selector/token-item.hbs" token=token}}
+    {{/each}}
+  </section>
+</section>

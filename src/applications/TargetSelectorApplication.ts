@@ -1,5 +1,3 @@
-import { EmptyObject } from "Foundry-VTT/src/types/utils.mjs";
-
 
 export class TargetSelectorApplication extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2) {
   static PARTS = {
@@ -40,8 +38,9 @@ export class TargetSelectorApplication extends foundry.applications.api.Handleba
 
   static onFormSubmit(this: TargetSelectorApplication, event: Event, form: HTMLFormElement, data: FormDataExtended) {
     const selected = Array.isArray(data.object.selected) ? data.object.selected : data.object.selected ? [data.object.selected] : [];
-    if (game.user instanceof User)
-      game.user.updateTokenTargets(selected as string[]);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
+    if (game.user instanceof User && canvas?.tokens) (canvas.tokens as any).setTargets(selected);
+    // game.user.updateTokenTargets(selected as string[]);
   }
 
   static onToggleCombatant(this: TargetSelectorApplication, e: Event, element: HTMLElement) {
@@ -60,7 +59,7 @@ export class TargetSelectorApplication extends foundry.applications.api.Handleba
     const container = this.element.querySelector(`[data-role="selected-items"]`);
     if (!(container instanceof HTMLElement)) return;
 
-    container.innerHTML="";
+    container.innerHTML = "";
     const selected = this.element.querySelectorAll(`[data-combatant]:has(.selected)`) as unknown as HTMLElement[];
     for (const item of selected) {
       const input = document.createElement("input");
@@ -81,12 +80,12 @@ export class TargetSelectorApplication extends foundry.applications.api.Handleba
       const disposition = parseInt(dispo.value);
       const combatants = this.knownCombatants.filter(combatant => combatant.disposition === disposition);
       // Shuffle
-      for (let i=combatants.length-1;i>0;i--) {
+      for (let i = combatants.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [combatants[i], combatants[j]] = [combatants[j], combatants[i]];
       }
       // Grab first N
-      const selected = combatants.slice(0,qty);
+      const selected = combatants.slice(0, qty);
 
       // Highlight selected tokens
       const combatantElements = this.element.querySelectorAll(`.combatant`);
@@ -94,7 +93,7 @@ export class TargetSelectorApplication extends foundry.applications.api.Handleba
         elem.classList.remove("selected")
 
       for (const combatant of selected) {
-        const elem = this.element.querySelector(`[data-combatant="${combatant.id as string}"] .combatant`);
+        const elem = this.element.querySelector(`[data-combatant="${combatant.id}"] .combatant`);
         elem?.classList.add("selected");
       }
       this.setSelectedFormElements();
@@ -105,7 +104,8 @@ export class TargetSelectorApplication extends foundry.applications.api.Handleba
     void this.close();
   }
 
-  protected _onRender(): void {
+  protected async _onRender(context: foundry.applications.api.ApplicationV2.RenderContext, options: foundry.applications.api.HandlebarsApplicationMixin.RenderOptions): Promise<void> {
+    await super._onRender(context, options);
     const dispoSelect = this.element.querySelector(`[data-action="changeDisposition"]`)
 
 
@@ -117,25 +117,26 @@ export class TargetSelectorApplication extends foundry.applications.api.Handleba
     }
   }
 
-  protected getCombatantResource(combatant: Combatant, resource: string): Record<string, number> {
+
+  protected getCombatantResource(combatant: Combatant, resource: string): Resource {
     return {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
-      value: (combatant.actor?.system?.resources as any)?.[resource].value ?? 0,
+      value: (combatant.actor?.system as any)?.resources?.[resource].value ?? 0,
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
-      max: (combatant.actor?.system?.resources as any)?.[resource].max ?? 0
+      max: (combatant.actor?.system as any)?.resources?.[resource].max ?? 0
     }
   }
 
-  protected parseCombatant(combatant: Combatant): Record<string, unknown> {
+  protected parseCombatant(combatant: Combatant): SimpleCombatant {
     return {
-      id: combatant.id,
-      name: combatant.name,
-      img: combatant.img?.replaceAll("'", "\\'"),
-      hp: this.getCombatantResource(combatant, "hp"),
-      mp: this.getCombatantResource(combatant, "mp"),
+      id: combatant.id ?? "",
+      name: combatant.name ?? "",
+      img: combatant.img?.replaceAll("'", "\\'") ?? "",
+      hp: this.getCombatantResource(combatant, "hp") ?? { value: 0, max: 0 },
+      mp: this.getCombatantResource(combatant, "mp") ?? { value: 0, max: 0 },
       actorId: combatant.actor?.id ?? "",
-      disposition: combatant.token?.disposition ?? "",
-      tokenId: combatant.tokenId
+      disposition: combatant.token?.disposition ?? CONST.TOKEN_DISPOSITIONS.HOSTILE,
+      tokenId: combatant.tokenId ?? ""
     }
   }
 
@@ -143,14 +144,12 @@ export class TargetSelectorApplication extends foundry.applications.api.Handleba
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const combatants = Array.from(this.element.querySelectorAll(`[data-combatant]`)) as HTMLElement[];
     const hasCombatants = combatants.some(item => item.dataset.disposition === `${disposition}`);
-    
+
     const hasNone = this.element.querySelector(`.no-combatants`);
 
-    console.log("Element:", hasNone);
-
     if (hasNone instanceof HTMLElement) {
-      if (hasCombatants) hasNone.style.display="none";
-      else hasNone.style.display="flex";
+      if (hasCombatants) hasNone.style.display = "none";
+      else hasNone.style.display = "flex";
     }
 
     for (const combatant of combatants) {
@@ -164,19 +163,20 @@ export class TargetSelectorApplication extends foundry.applications.api.Handleba
     this.setSelectedFormElements();
   }
 
-  protected knownCombatants: Record<string, unknown>[] = [];
+  protected knownCombatants: SimpleCombatant[] = [];
 
-  protected async _prepareContext(options: { force?: boolean | undefined; position?: { top?: number | undefined; left?: number | undefined; width?: number | "auto" | undefined; height?: number | "auto" | undefined; scale?: number | undefined; zIndex?: number | undefined; } | undefined; window?: { title?: string | undefined; icon?: string | false | undefined; controls?: boolean | undefined; } | undefined; parts?: string[] | undefined; isFirstRender?: boolean | undefined; }): Promise<EmptyObject> {
+
+  protected async _prepareContext(options: foundry.applications.api.ApplicationV2.RenderOptions): Promise<TargetSelectorContext> {
     const context = await super._prepareContext(options);
 
-    this.knownCombatants=(game.combat?.combatants?.contents.map(combatant => this.parseCombatant(combatant))) ?? [];
+    this.knownCombatants = (game.combat?.combatants?.contents.map(combatant => this.parseCombatant(combatant))) ?? [];
 
     return {
       ...context,
       // combatants: (game.combat?.combatants?.contents.map(combatant => ({...combatant, img: combatant.img?.replaceAll("'", "\\'")}))) ?? [],
       combatants: this.knownCombatants,
       quantity: 1,
-      disposition: 1,
+      disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY,
       dispositionSelect: {
         "-1": "EPFU.DIALOGS.TARGETSELECTOR.DISPOSITIONS.HOSTILE",
         0: "EPFU.DIALOGS.TARGETSELECTOR.DISPOSITIONS.NEUTRAL",
@@ -184,10 +184,35 @@ export class TargetSelectorApplication extends foundry.applications.api.Handleba
         2: "EPFU.DIALOGS.TARGETSELECTOR.DISPOSITIONS.SECRET"
       },
       buttons: [
-        { icon: "fas fa-times", label: "Cancel", action: "cancel" },
-        { icon: "fas fa-bullseye", label: "FU.Target", action: "target" }
+        { icon: "fas fa-times", label: "Cancel", action: "cancel", type: "button" },
+        { icon: "fas fa-bullseye", label: "FU.Target", action: "target", type: "submit" }
       ]
-    } as unknown as EmptyObject;
+    };
   }
 
+}
+
+interface TargetSelectorContext extends foundry.applications.api.ApplicationV2.RenderContext {
+  combatants: SimpleCombatant[];
+  quantity: number;
+  disposition: CONST.TOKEN_DISPOSITIONS;
+  dispositionSelect: Record<string, string>;
+
+  buttons: foundry.applications.api.ApplicationV2.FormFooterButton[];
+}
+
+interface SimpleCombatant {
+  id: string;
+  name: string;
+  hp: Resource;
+  mp: Resource;
+  img: string;
+  actorId: string;
+  disposition: CONST.TOKEN_DISPOSITIONS;
+  tokenId: string;
+}
+
+interface Resource {
+  value: number;
+  max: number;
 }
