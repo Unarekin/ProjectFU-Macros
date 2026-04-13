@@ -53,17 +53,18 @@ try {
   const config = foundry.utils.mergeObject(DEFAULT_CONFIGURATION, args[2]);
 
   const tokenAnimations = SpriteAnimator.getAnimations(token).map(
-    (anim) => anim.name
+    anim => anim.name,
   );
 
   const tokenSettings = (
-    token.actor ? token.actor : token.document ? token.document : token
-  ).getFlag("world", SETTINGS_FLAG);
+    token.actor ? token.actor
+    : token.document ? token.document
+    : token).getFlag("world", SETTINGS_FLAG);
 
   const sourceX = token.x;
   const sourceY = token.y;
 
-  const flags = chatMessage.flags.projectfu.CheckV2;
+  const flags = chatMessage.flags.projectfu.Check;
   const { critical, fumble } = flags;
 
   if (!config.critAnimation) config.critAnimation = config.attackAnimation;
@@ -115,20 +116,17 @@ try {
     // Hit/miss animation
     if ((target && target instanceof Tile) || target instanceof Token) {
       const settings = (
-        target.actor ? target.actor : target.document ? target.document : target
-      ).getFlag("world", SETTINGS_FLAG);
+        target.actor ? target.actor
+        : target.document ? target.document
+        : target).getFlag("world", SETTINGS_FLAG);
       const hitAnimation =
-        hit && settings?.hitAnimation
-          ? settings.hitAnimation
-          : !hit && settings?.missAnimation
-          ? settings.missAnimation
-          : "";
+        hit && settings?.hitAnimation ? settings.hitAnimation
+        : !hit && settings?.missAnimation ? settings.missAnimation
+        : "";
       const hitDelay =
-        hit && settings?.hitDelay
-          ? settings.hitDelay
-          : !hit && settings?.missDelay
-          ? settings.missDelay
-          : 0;
+        hit && settings?.hitDelay ? settings.hitDelay
+        : !hit && settings?.missDelay ? settings.missDelay
+        : 0;
       if (hitAnimation) {
         const anims = [hitAnimation];
         if (settings?.defaultAnimation) anims.push(settings.defaultAnimation);
@@ -148,29 +146,20 @@ try {
     }
 
     const attackSound =
-      (critical
-        ? config.critSound
-        : fumble
-        ? config.fumbleSound
-        : hit
-        ? config.hitSound
-        : config.missSound) ?? "";
+      (critical ? config.critSound
+      : fumble ? config.fumbleSound
+      : hit ? config.hitSound
+      : config.missSound) ?? "";
     const soundDelay =
-      (critical
-        ? config.critSoundDelay
-        : fumble
-        ? config.fumbleSoundDelay
-        : hit
-        ? config.hitSoundDelay
-        : config.missSoundDelay) ?? 0;
+      (critical ? config.critSoundDelay
+      : fumble ? config.fumbleSoundDelay
+      : hit ? config.hitSoundDelay
+      : config.missSoundDelay) ?? 0;
     const soundVolume =
-      (critical
-        ? config.critSoundVolume
-        : fumble
-        ? config.fumbleSoundVolume
-        : hit
-        ? config.hitSoundVolume
-        : config.missSoundVolume) ?? 0;
+      (critical ? config.critSoundVolume
+      : fumble ? config.fumbleSoundVolume
+      : hit ? config.hitSoundVolume
+      : config.missSoundVolume) ?? 0;
 
     if (attackSound) {
       new Sequence()
@@ -182,10 +171,9 @@ try {
     }
 
     // Attack animation
-    const attackAnimation = critical
-      ? config.critAnimation
-      : fumble
-      ? config.fumbleAnimation
+    const attackAnimation =
+      critical ? config.critAnimation
+      : fumble ? config.fumbleAnimation
       : config.attackAnimation;
 
     if (config.attackSound) {
@@ -221,7 +209,7 @@ try {
             curr.document.height * canvas.scene.dimensions.size,
         };
       },
-      { x: 0, y: 0 }
+      { x: 0, y: 0 },
     );
     pos.x /= aaHandler.allTargets.length;
     pos.y /= aaHandler.allTargets.length;
@@ -239,13 +227,13 @@ try {
     // Sort by leading edge
     const targets = aaHandler.allTargets.sort((a, b) => {
       const edgeA =
-        sourceX > a.x
-          ? a.x + a.document.width * canvas.scene.dimensions.size
-          : a.x - a.document.width * canvas.scene.dimensions.size;
+        sourceX > a.x ?
+          a.x + a.document.width * canvas.scene.dimensions.size
+        : a.x - a.document.width * canvas.scene.dimensions.size;
       const edgeB =
-        sourceX > b.x
-          ? b.x + b.document.width * canvas.scene.dimensions.size
-          : b.x - b.document.width * canvas.scene.dimensions.size;
+        sourceX > b.x ?
+          b.x + b.document.width * canvas.scene.dimensions.size
+        : b.x - b.document.width * canvas.scene.dimensions.size;
       return edgeB - edgeA;
     });
 
@@ -253,7 +241,7 @@ try {
     for (let i = 0; i < targets.length; i++) {
       await playAttackAnimation(
         aaHandler.allTargets[i],
-        flags.additionalData.targets[i]
+        flags.additionalData.targets[i],
       );
     }
   } else {
@@ -282,7 +270,7 @@ try {
 }
 
 function wait(ms) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(resolve, ms);
   });
 }
